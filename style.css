@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
+
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('background1.avif') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+header{
+
+    /*For the top website bar*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: transparent;
+    
+    
+    /*Spacing of the heading, so its not all on top of each other*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+.logo   /*logo part*/
+{
+
+    margin-left: -20px;
+    font-size: 2em;
+    color: beige;
+    user-select: none;
+    cursor : none;
+}
+
+
+.navigation a   /*navigation part*/
+{
+    position: relative;
+    font-size: 1.1em;
+    color:beige;
+    text-decoration: none;
+    font-weight: 400;
+    margin-left: 15px; /*moves margin*/
+
+}
+
+.navigation a::after    /*creates bars on bottom of the navigation part*/
+{
+    content: ' ';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: beige;
+    border-radius: 5px;
+    transform-origin: center;    /*from right (1)*/
+    transform: scaleX(0);  /*making bars dissapear*/
+    transition: transform .5s; /*setting transform time*/
+}
+
+.navigation a:hover::after
+{
+    transform-origin: center;     /*to left* (1)*/
+    transform: scaleX(1);  /*making bars appear on hover*/
+}
+
+
+.navigation .btnLogin-popup /*for Login button*/
+{
+    width: 100px;
+    height: 40px;
+
+    background: transparent;
+    border: 2px solid beige;
+    outline: none;
+    border-radius: 6px;
+
+    cursor:pointer; /*makes cursor change*/
+
+    font-size: 1.1em;
+    color: beige;
+    font-weight: 500;
+    margin-left: 30px;
+}
+
+.navigation .btnLogin-popup:hover 
+{
+    background: beige;
+    color: #162938;
+}
+
+/*.navigation .icon
+{
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: beige;
+    cursor: pointer;
+
+}
+
+.navigation .ion-icon
+{
+    vertical-align: middle;
+    font-size:1.5em;
+}
+*/
+.wrapper    /*Wrapper for login pop up*/
+{
+
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;    /*rounds up the boarder*/
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5);
+    box-shadow: 0 0 30px rgba(0, 0 ,0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /*hides non active screen wrapper*/
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+
+}
+
+.wrapper.active-popup
+{
+    transform: scale(1);
+}
+
+.wrapper.active
+{
+    height: 520px;
+}
+
+.wrapper .form-box
+{
+    width: 100%;
+    padding: 40px;   
+}
+
+.wrapper .form-box.login
+{
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper.active .form-box.login /*moves when active for login screen (when register is clicked)*/ 
+{
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .form-box.register /*moves when active for register screen (when login is clicked)*/ 
+{
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register
+{
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper .icon-close    /*close button of wrapper*/
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: transparent;
+    font-size: 2em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box h2    /*Big login headline*/
+{
+    font-size: 2em;
+    color: beige;
+    text-align: center;
+}
+
+.input-box  /*Underline for pass and email , fix it */
+{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid beige;
+    margin: 30px 0;
+}
+
+.input-box label    /*email password labels*/
+{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    transform: translateY(-50%);
+    color: beige;
+    font-weight: 500px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,  /*shifting email and password when typing*/
+.input-box input:valid~label
+{
+    top: -2px
+}
+
+.input-box input    /*input text from user*/
+{
+    width: 100%;
+    height: 100%;
+    color: white;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 0.8em;
+    font-weight: 400;
+    padding: 0 35px 0 5px; /*makes password notn overcome the icon if too long */
+
+}
+
+.input-box .icon    /*password and email icons*/
+{
+    position: absolute;
+    color: beige;
+    right: 2px;
+    font-size: 1.2em;
+    line-height: 57px;
+
+}
+
+.remember-forgot    /*remember me part */
+{
+    display: flex;
+    justify-content: space-between;
+    font-size: .8em;
+    color: beige;
+    font-weight: 500;
+    margin: -15px 0 15px;
+}
+
+.remember-forgot label input    
+{
+    align-items: baseline;
+    accent-color: beige;
+    margin-right: 3px;
+}
+
+.remember-forgot a /*forgot part*/
+{
+    text-decoration: none;
+    color: beige;
+    justify-content: space-between;
+    font-size: .9em;
+}
+
+.remember-forgot a:hover /*underlining forgot*/
+{
+    text-decoration: underline;
+}
+
+.btn    /*button login*/
+{
+
+    background: transparent;
+    border: 2px solid beige;
+    outline: none;
+    border-radius: 4px;
+    font-weight: 500;
+
+    font-size: 10px;
+    width: 100%;
+    height: 30px;
+    color:beige;
+}
+
+.btn:hover  /*changing color on hover*/
+{
+    background: beige;
+    color: #162938;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.login-register  /*dont have an account part*/
+{
+    text-align: center;
+    color: beige;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 10px 0;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.login-register p a /*register button*/
+{
+    color: beige;
+    font-size: 10px;
+    font-weight: 600;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.login-register p a:hover
+{
+    text-decoration: underline;
+}
